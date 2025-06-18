@@ -1,15 +1,20 @@
 // sysprog-windows-2.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
+#include <Windows.h>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+#include <cstdio>
+#include <tchar.h>
+
+int main(int argc, char** argv) {
+  TCHAR program_name[MAX_PATH];
+  GetModuleFileName(NULL, program_name, MAX_PATH);
+
+  if ((argc != 1 && argc != 3)
+      || (argc == 3 && strncmp(argv[1], "/s", 3) != 0)) {
+    ::_tprintf(TEXT("Usage: %s [/s DIR]"), program_name);
+  }
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
 // Tips for Getting Started: 
 //   1. Use the Solution Explorer window to add/manage files
